@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>张耕悦 | 站内页面</title>
+  <meta name="description" content="张耕悦的站内跳转示例页面。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", "Noto Sans SC", system-ui, sans-serif;
+      background: linear-gradient(180deg, #fbfaf4 0%, #f5f8ef 100%);
+      color: #18311f;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .card {
+      width: min(860px, 100%);
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(72,103,52,.14);
+      box-shadow: 0 22px 60px rgba(44,68,40,.14);
+      border-radius: 28px;
+      padding: 34px;
+      backdrop-filter: blur(18px);
+    }
+    h1 {
+      font-family: "Noto Serif SC", serif;
+      margin: 12px 0 14px;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+    p {
+      color: #5b6d5f;
+      line-height: 1.9;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    a {
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 12px 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .primary {
+      color: #fff;
+      background: linear-gradient(135deg, #2f7d4f, #245f3a);
+    }
+    .secondary {
+      color: #18311f;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(47,125,79,.18);
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <p>站内页面</p>
+    <h1>你已经打开了另一个网页</h1>
+    <p>这个页面可以继续扩展成“关于页”“资料页”或者“详情页”，实现更完整的站内导航。</p>
+    <div class="actions">
+      <a class="primary" href="index.html">返回首页</a>
+      <a class="secondary" href="https://www.example.com" target="_blank" rel="noopener noreferrer">打开外部网站</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>张耕悦 | 个人主页</title>
+  <meta name="description" content="张耕悦的个人主页，包含导航栏、外链按钮、个人简介与联系方式。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f4eb;
+      --card: rgba(255, 255, 255, 0.8);
+      --border: rgba(72, 103, 52, 0.14);
+      --text: #18311f;
+      --muted: #5b6d5f;
+      --green: #2f7d4f;
+      --orange: #e38a2f;
+      --shadow: 0 22px 60px rgba(44, 68, 40, 0.14);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Noto Sans SC", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(111, 168, 78, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(227, 138, 47, 0.18), transparent 28%),
+        linear-gradient(180deg, #fbfaf4 0%, #f5f8ef 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .bg-orb {
+      position: fixed;
+      width: 40vw;
+      height: 40vw;
+      min-width: 320px;
+      min-height: 320px;
+      border-radius: 50%;
+      filter: blur(42px);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    .bg-orb-left { top: -14vw; left: -16vw; background: radial-gradient(circle, rgba(111,168,78,.55), rgba(111,168,78,0)); }
+    .bg-orb-right { top: 10vh; right: -14vw; background: radial-gradient(circle, rgba(227,138,47,.45), rgba(227,138,47,0)); }
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image:
+        linear-gradient(rgba(24,49,31,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,49,31,.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mix-blend-mode: multiply;
+    }
+    .page-shell {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+      position: relative;
+      z-index: 1;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius-xl);
+    }
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--green), #245f3a);
+    }
+    .brand-text strong {
+      display: block;
+      font-family: "Noto Serif SC", serif;
+      font-size: 1.02rem;
+    }
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 2px;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(47,125,79,.12);
+    }
+    .nav a:hover { transform: translateY(-1px); }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 26px;
+      padding: 30px;
+      align-items: stretch;
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-size: .8rem;
+      font-weight: 700;
+    }
+    h1, h2, h3 { font-family: "Noto Serif SC", "Songti SC", serif; margin: 0; }
+    h1 { font-size: clamp(3rem, 6vw, 5.4rem); line-height: .98; letter-spacing: -.03em; }
+    .subtitle { max-width: 54ch; color: var(--muted); font-size: 1.05rem; line-height: 1.9; margin: 18px 0 0; }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--green), #245f3a);
+      box-shadow: 0 14px 28px rgba(47,125,79,.24);
+    }
+    .button.secondary {
+      color: var(--text);
+      background: rgba(255,255,255,.76);
+      border: 1px solid rgba(47,125,79,.18);
+    }
+    .hero-panel {
+      border-radius: 28px;
+      padding: 22px;
+      background: linear-gradient(160deg, rgba(255,255,255,.95), rgba(245,248,239,.7));
+      border: 1px solid rgba(47,125,79,.14);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .panel-badge {
+      font-size: .8rem;
+      font-weight: 700;
+      color: #8b5619;
+      background: rgba(243,179,90,.22);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+    .portrait {
+      width: min(100%, 260px);
+      aspect-ratio: 1;
+      margin: 24px auto 18px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+    .portrait::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(243,179,90,.5), transparent 35%),
+        radial-gradient(circle at 70% 70%, rgba(111,168,78,.55), transparent 38%),
+        conic-gradient(from 0deg, rgba(47,125,79,.15), rgba(227,138,47,.18), rgba(47,125,79,.15));
+    }
+    .portrait-core {
+      position: absolute;
+      inset: 16%;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #fffdf8, #edf5e7);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(47,125,79,.12);
+      font-family: "Noto Serif SC", serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--green), var(--orange));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .panel-note { margin: 0; line-height: 1.8; color: var(--muted); text-align: center; }
+    .section {
+      margin-top: 22px;
+      padding: 26px;
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .section-index {
+      color: var(--orange);
+      font-weight: 800;
+      letter-spacing: .14em;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 22px;
+    }
+    .story { grid-column: span 6; padding: 26px; }
+    .wide { grid-column: span 12; }
+    .story p, .timeline p, .contact-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.95;
+      font-size: 1rem;
+    }
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .timeline-grid div, .contact-item {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(236,243,226,.72));
+      border: 1px solid rgba(47,125,79,.12);
+    }
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .contact-item strong { display: block; margin-bottom: 8px; }
+    .footer {
+      margin-top: 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    @media (max-width: 960px) {
+      .topbar, .hero { grid-template-columns: 1fr; display: grid; }
+      .story { grid-column: span 12; }
+      .timeline-grid, .contact-grid { grid-template-columns: 1fr; }
+      .nav { justify-content: flex-start; }
+    }
+    @media (max-width: 640px) {
+      .page-shell { width: min(100vw - 20px, 1180px); padding: 18px 0 40px; }
+      .hero, .story, .section { padding: 20px; border-radius: 24px; }
+      .hero-actions, .links-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb-left"></div>
+  <div class="bg-orb bg-orb-right"></div>
+  <div class="noise"></div>
+
+  <main class="page-shell">
+    <header class="topbar card">
+      <a class="brand" href="#home">
+        <div class="brand-mark">Z</div>
+        <div class="brand-text">
+          <strong>张耕悦</strong>
+          <span>个人主页 · 可导航 · 可外链</span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="#about">关于我</a>
+        <a href="#skills">核心能力</a>
+        <a href="#contact">联系方式</a>
+        <a href="about.html">站内页面</a>
+        <a href="https://www.example.com" target="_blank" rel="noopener noreferrer">外部网站</a>
+      </nav>
+    </header>
+
+    <section class="hero card" id="home">
+      <div>
+        <p class="eyebrow">个人主页 · Navigation Ready</p>
+        <h1>张耕悦</h1>
+        <p class="subtitle">
+          这是一个带导航栏的个人主页示例，已经加入站内跳转和外链按钮。你可以继续把它扩展成作品集、资料页、新闻页或动态内容网站。
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#contact">联系我</a>
+          <a class="button secondary" href="about.html">打开站内页面</a>
+          <a class="button secondary" href="https://www.example.com" target="_blank" rel="noopener noreferrer">打开外部网站</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="panel-top">
+          <span>Personal Profile</span>
+          <span class="panel-badge">Online Portfolio</span>
+        </div>
+        <div class="portrait">
+          <div class="portrait-core">ZG</div>
+        </div>
+        <p class="panel-note">
+          导航栏、按钮、站内页、外部链接已经配好。后面如果你要加“上传资料”“动态链接”“文章列表”，也可以继续在这个结构上扩展。
+        </p>
+      </aside>
+    </section>
+
+    <section class="content-grid">
+      <article class="card story section" id="about">
+        <div class="section-head">
+          <span class="section-index">01</span>
+          <h2>关于我</h2>
+        </div>
+        <p>这里可以放你的简介、专业经历、教育背景或项目经历。现在它先作为一个清晰的个人主页骨架，方便后续继续增加内容。</p>
+        <p>如果你想做成真正的外部发布网站，可以把这个页面部署到 GitHub Pages、Vercel 或自己的服务器上。</p>
+      </article>
+
+      <article class="card story section" id="skills">
+        <div class="section-head">
+          <span class="section-index">02</span>
+          <h2>核心能力</h2>
+        </div>
+        <p>你可以在这里放“行业经验”“专业能力”“项目成果”“作品链接”等信息，让页面更像一个完整的个人主页。</p>
+        <div class="links-row">
+          <a class="button primary" href="about.html">进入站内页面</a>
+          <a class="button secondary" href="https://www.example.com" target="_blank" rel="noopener noreferrer">访问外部站点</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="card section wide" id="contact">
+      <div class="section-head">
+        <span class="section-index">03</span>
+        <h2>联系方式</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <strong>网页跳转</strong>
+          <p>点击导航栏或按钮即可进入站内页面和外部网站。</p>
+        </div>
+        <div class="contact-item">
+          <strong>后续扩展</strong>
+          <p>你可以继续加上传入口、文章页、资料页或登录页。</p>
+        </div>
+        <div class="contact-item">
+          <strong>发布方式</strong>
+          <p>如果要公开访问，再把这个站点部署到公网即可。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section wide">
+      <div class="section-head">
+        <span class="section-index">04</span>
+        <h2>下一步可以做什么</h2>
+      </div>
+      <div class="timeline-grid">
+        <div>
+          <h3>加上传功能</h3>
+          <p>接入表单和后端接口后，就能上传资料。</p>
+        </div>
+        <div>
+          <h3>加动态链接</h3>
+          <p>根据参数生成不同页面，例如详情页、文章页。</p>
+        </div>
+        <div>
+          <h3>正式发布</h3>
+          <p>把页面部署到公网后，别人就能通过网址访问。</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">张耕悦 · 个人主页示例 · 含导航栏与外链按钮</p>
+  </main>
+</body>
+</html>
